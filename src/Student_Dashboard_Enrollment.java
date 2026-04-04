@@ -139,6 +139,7 @@ public class Student_Dashboard_Enrollment {
                     "WHERE e.student_username = ?";
             PreparedStatement stmt = con.prepareStatement(query);
             stmt.setString(1, currentUser.getUsername());
+
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 enrolledList.add(new Course(rs.getInt("id"), rs.getString("name"), rs.getString("code")));

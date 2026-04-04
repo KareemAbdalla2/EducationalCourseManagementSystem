@@ -14,10 +14,10 @@ public class Admin_dashbroad_addStudent {
     private Scene Addusers;
     private TextField usernameField = new TextField();
     private PasswordField passwordField = new PasswordField();
-    private TextField role = new TextField();
+
     private TextField Email = new TextField();
     private Stage stage;
-
+    private ComboBox<String> comboBox = new ComboBox<>();
     public Admin_dashbroad_addStudent(Stage primaryStage) {
         this.stage = primaryStage;
     }
@@ -38,9 +38,13 @@ public class Admin_dashbroad_addStudent {
                addNewUser();
             }
         });
+        {
+            comboBox.setValue("admin");
+            comboBox.getItems().addAll("admin", "student", "instructer");
+        }
         adminLayout.getChildren().addAll(btnBack,new Label("User name "),usernameField,
                 new Label("Password:"), passwordField,
-                new Label("role:"), role,
+                new Label("role:"), comboBox,
                 new Label("email:"), Email,
                 addUser);
         Addusers = new Scene(adminLayout, 600, 600);
@@ -50,12 +54,13 @@ public class Admin_dashbroad_addStudent {
     }
 
     private  void addNewUser(){
+
         String salt = BCrypt.gensalt(12);
         // concatenate the salt with the password and hash the result:
         String hashedPassword = BCrypt.hashpw(passwordField.getText(), salt);
         String name = usernameField.getText();
         String password1 = hashedPassword;
-        String role1 = role.getText();
+        String role1 = comboBox.getValue();
         String email =  Email.getText();
 
 

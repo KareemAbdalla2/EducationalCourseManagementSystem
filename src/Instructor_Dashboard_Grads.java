@@ -106,9 +106,11 @@ public class Instructor_Dashboard_Grads {
         // Retrieve data from DB and fill up the table
         try {
             Connection con = DBUtils.establishConnection();
-            String query = "SELECT id,student_username,course_id,enrolled_at,grad FROM enrollment where course_id ="+course.getId()+"";
+            String query = "SELECT id,student_username,course_id,enrolled_at,grad FROM enrollment where course_id =?";
+
 
             PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, course.getId());
             ResultSet rs = stmt.executeQuery();
 
 
